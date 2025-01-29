@@ -65,7 +65,8 @@ return {
 			dashboard.button("<C-d>", "󱓧  Open daily-notes", ":ObsidianToday<CR>"),
 			dashboard.button("r", "󰄉  Recent files", ":Telescope oldfiles <CR>"),
 			dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy update<CR>"),
-			dashboard.button("c", "  Settings", ":e $HOME/.config/nvim/init.lua<CR>"),
+			dashboard.button("c", "  Settings", ":e $HOME/Appdata/Local/nvim/init.lua<CR>"),
+			dashboard.button("g", "󰊢  Open LazyGit", "<cmd>LazyGit<CR>"),
 			dashboard.button("w", "  Change header image", function()
 				change_header()
 			end),
