@@ -1,29 +1,92 @@
--- ~/.config/nvim/lua/Config/plugins/dashboard.lua
+--ToDO: setFixed height for loaded images
+
 return {
-  "goolord/alpha-nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" }, -- Falls Icons benötigt werden
-  config = function()
-  
-local alpha = require('alpha')
-local dashboard = require('alpha.themes.dashboard')
+	"goolord/alpha-nvim",
+	event = "VimEnter",
+	config = function()
+		local alpha = require("alpha")
+		local dashboard = require("alpha.themes.dashboard")
+		_Gopts = {
+			position = "center",
+			hl = "Type",
+			wrap = "overflow",
+		}
 
--- Lade das ASCII-Bild aus girl_cig.lua
-local girl_cig = require('Config.plugins.Images.girl_cig')  -- Pfad zur Lua-Datei
+		local function load_random_header()
+			math.randomseed(os.time())
+			local header_folder = vim.fn.stdpath("config") .. "/lua/Config/plugins/header_img/"
+			local files = vim.fn.globpath(header_folder, "*.lua", true, true)
+			if #files == 0 then
+				return nil
+			end
 
--- Setze das Bild als Header
-dashboard.section.header = girl_cig
+			local random_file = files[math.random(#files)]
+			local separator = package.config:sub(1, 1)
+			local module_name = "custom.plugins.header_img." .. random_file:match("([^" .. separator .. "]+)%.lua$")
 
--- Setze die Buttons für den Startbildschirm
-dashboard.section.buttons.val = {
-    dashboard.button('f', '  Find file', ':Telescope find_files<CR>'),
-    dashboard.button('r', '  Recent files', ':Telescope oldfiles<CR>'),
-    dashboard.button('n', '  New file', ':enew<CR>'),
-    dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
-}
+			package.loaded[module_name] = nil
 
-    -- Footer
-    dashboard.section.footer.val = "Welcome to Neovim"
+			local ok, module = pcall(require, module_name)
+			if ok and module.header then
+				-- Add padding to the header to set a fixed height
+				local fixed_height = 2 -- Set your desired height here
+				local header_lines = module.header
+				local padding_lines = fixed_height - #header_lines
+				if padding_lines > 0 then
+					for _ = 1, padding_lines do
+						table.insert(header_lines, 1, "")
+					end
+				end
+				return header_lines
+			else
+				return nil
+			end
+		end
 
-    alpha.setup(dashboard.config)
-  end,
+		local function change_header()
+			local new_header = load_random_header()
+			if new_header then
+				dashboard.config.layout[2] = new_header
+				vim.cmd("AlphaRedraw") -- Przeładuj dashboard
+			else
+				print("No images inside header_img folder.")
+			end
+		end
+
+		-- Inicjalne załadowanie nagłówka
+		local header = load_random_header()
+		if header then
+			dashboard.config.layout[2] = header
+		else
+			print("No images inside header_img folder.")
+		end
+
+		dashboard.section.buttons.val = {
+			dashboard.button("<C-d>", "󱓧  Open daily-notes", ":ObsidianToday<CR>"),
+			dashboard.button("r", "󰄉  Recent files", ":Telescope oldfiles <CR>"),
+			dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy update<CR>"),
+			dashboard.button("c", "  Settings", ":e $HOME/.config/nvim/init.lua<CR>"),
+			dashboard.button("w", "  Change header image", function()
+				change_header()
+			end),
+			dashboard.button("t", "🖮  Practice typing with Typr ", ":Typr<CR>"),
+		}
+
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "LazyVimStarted",
+			desc = "Add Alpha dashboard footer",
+			once = true,
+			callback = function()
+				local stats = require("lazy").stats()
+				local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
+				dashboard.section.footer.val =
+					{ " ", " ", " ", " Loaded " .. stats.count .. " plugins  in " .. ms .. " ms " }
+				dashboard.section.header.opts.hl = "DashboardFooter"
+				pcall(vim.cmd.AlphaRedraw)
+			end,
+		})
+
+		dashboard.opts.opts.noautocmd = true
+		alpha.setup(dashboard.opts)
+	end,
 }

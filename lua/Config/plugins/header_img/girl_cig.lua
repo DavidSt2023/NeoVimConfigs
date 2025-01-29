@@ -2612,3 +2612,4 @@ local header = {type='text', opts={position='center', hl = {
 }
 
  return {header = header}
+
