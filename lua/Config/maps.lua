@@ -1,30 +1,29 @@
 -- ~/nvim/lua/slydragonn/maps.lua
 
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local function map(mode, lhs, rhs)
-    vim.keymap.set(mode, lhs, rhs, { silent = true })
+local function map(mode, lhs, rhs, desc)
+	vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
 end
 
-
 -- Save
-map("n", "<leader>w", "<CMD>update<CR>")
+map("n", "<leader>w", "<CMD>update<CR>", "Save")
 
 -- Quit
-map("n", "<leader>q", "<CMD>q<CR>")
-
+map("n", "<leader>qq", "<CMD>q<CR>", "Quit")
+map("n", "<leader>qr", "<Cmd>w<Bar>Alpha<Bar>redraw!<CR>", "Dashboard with Saving")
+map("n", "<leader>qw", "<CMD>wq<CR>", "Quit with Saving")
 -- Exit insert mode
-map("i", "jk", "<ESC>")
+map("i", "jk", "<ESC>", "Exit Insert Mode")
 
 -- NeoTree
 map("n", "<leader>e", "<CMD>Neotree toggle<CR>")
 map("n", "<leader>r", "<CMD>Neotree focus<CR>")
 
 -- New Windows
-map("n", "<leader>o", "<CMD>vsplit<CR>")
-map("n", "<leader>p", "<CMD>split<CR>")
+map("n", "<leader>o", "<CMD>vsplit<CR>", "Vertical Split")
+map("n", "<leader>p", "<CMD>split<CR>", "Horizontal Split")
 
 -- Window Navigation
 map("n", "<C-h>", "<C-w>h")
@@ -38,4 +37,6 @@ map("n", "<C-Right>", "<C-w>>")
 map("n", "<C-Up>", "<C-w>+")
 map("n", "<C-Down>", "<C-w>-")
 
---Lazy Git
+--Copilot
+map("n", "<leader>od", "<CMD>Copilot disable <CR>", "Deaktivate Copilot")
+map("n", "<leader>oa", "<CMD>Copilot <CR>", "Aktivate Copilot")
