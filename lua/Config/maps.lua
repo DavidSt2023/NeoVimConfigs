@@ -3,8 +3,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local function map(mode, lhs, rhs, desc)
-	vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
+local map = function(mode, keys, func, desc, opts)
+	opts = opts or {}
+	opts.desc = desc
+	vim.keymap.set(mode, keys, func, opts)
 end
 
 -- Save
@@ -40,3 +42,12 @@ map("n", "<C-Down>", "<C-w>-")
 --Copilot
 map("n", "<leader>od", "<CMD>Copilot disable <CR>", "Deaktivate Copilot")
 map("n", "<leader>oa", "<CMD>Copilot <CR>", "Aktivate Copilot")
+
+--Transparency
+map("n", "<leader>tc", ":TransparentToggle<CR>", "Toggle transparency", { noremap = true, silent = true })
+
+--Reminders
+map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>', "Hint: Use h")
+map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>', "Hint: Use l")
+map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>', "Hint: Use k")
+map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>', "Hint: Use j")
