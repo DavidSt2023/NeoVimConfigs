@@ -4,9 +4,12 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		require("telescope").setup({
-			defaults = {
+			defaults = { 
+				selection_caret = "󱞩 ",
 				initial_mode = "normal", -- Startet im Normalmodus statt im Insertmodus
+
 			},
+
 		})
 		-- set keymaps
 		local keymap = vim.keymap

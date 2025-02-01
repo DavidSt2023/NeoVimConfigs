@@ -42,6 +42,7 @@ map("n", "<C-Down>", "<C-w>-")
 --Copilot
 map("n", "<leader>od", "<CMD>Copilot disable <CR>", "Deaktivate Copilot")
 map("n", "<leader>oa", "<CMD>Copilot <CR>", "Aktivate Copilot")
+map("n", "<leader>oc", "<CMD>CopilotChat <CR>", "Copilot Chat")
 
 --Transparency
 map("n", "<leader>tc", ":TransparentToggle<CR>", "Toggle transparency", { noremap = true, silent = true })
@@ -51,3 +52,6 @@ map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>', "Hint: Use h")
 map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>', "Hint: Use l")
 map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>', "Hint: Use k")
 map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>', "Hint: Use j")
+
+--Settings
+map("n","<leader>st","<CMD>ThemePicker<CR>","Theme auswählen")

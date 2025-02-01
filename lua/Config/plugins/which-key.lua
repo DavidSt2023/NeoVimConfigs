@@ -4,11 +4,10 @@ return {
 	opts = {},
 	config = function()
 		local wk = require("which-key")
-		wk.register({
+		wk.add({
+			{ "<leader>t", group = "Themes" },
 			{ "<leader>o", group = " Copilot" },
 			{ "<leader>q", group = "󰈆 Quit" },
-		})
-		wk.add({
 			{ "<leader>f", group = "file" }, -- group
 			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
 			{ "<leader>fn", desc = "New File" },
