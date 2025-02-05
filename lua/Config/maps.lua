@@ -61,7 +61,7 @@ map("n", "<F5>", ":lua require('dap').continue()<CR>", " Continue")
 map("n", "<F10>", ":lua  require('dap').step_over()<CR>", " Step over")
 map("n", "<F11>", ":lau require('dap').step_into()<CR>", " Setp Into")
 map("n", "<F12>", ":lua require('dap').step_out()<CR>", " Step out")
-map("n", "<leader>b", ":lua require('dap').toggle_breakpoint()<CR>", " Toggle Breakpoint")
+
 map(
 	"n",
 	"<leader>B",
@@ -74,6 +74,7 @@ map(
 	":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) ",
 	" Log Point"
 )
+map("n", "<leader>bn", "<cmd>BufferLineCycleNext<cr>",  "Next Buffer" )
 --Telescope
 		map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", "Fuzzy find files in cwd")
 		map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",  "Fuzzy find recent files" )

@@ -14,3 +14,6 @@ end
 local settings = require "Config.userSettings"
 local Theme = settings.getSettings()["Theme"]
 vim.cmd("colorscheme " .. Theme)
+--edgy settings
+vim.opt.splitkeep = "screen"
+vim.opt.laststatus = 3

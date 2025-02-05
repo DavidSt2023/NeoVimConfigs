@@ -18,6 +18,7 @@ return {
                 "jsonls",
                 "pyright",
                 "tailwindcss",
+				"java-language-server",
             },
         })
 
@@ -26,6 +27,7 @@ return {
                 "prettier",
                 "stylua", -- lua formatter
                 "eslint_d",
+				"java-language-server",
             },
         })
     end,
