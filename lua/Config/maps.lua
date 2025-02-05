@@ -74,3 +74,9 @@ map(
 	":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) ",
 	" Log Point"
 )
+--Telescope
+		map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", "Fuzzy find files in cwd")
+		map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",  "Fuzzy find recent files" )
+		map("n", "<leader>fb", "<cmd>Telescope buffers<cr>",  "Find string in cwd" )
+		map("n", "<leader>fs", "<cmd>Telescope git_status<cr>",  "Find string under cursor in cwd" )
+		map("n", "<leader>fc", "<cmd>Telescope git commits<cr>", "Find todos" )

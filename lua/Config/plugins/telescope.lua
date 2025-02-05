@@ -4,21 +4,26 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		require("telescope").setup({
-			defaults = { 
+			defaults = {
 				selection_caret = "󱞩 ",
-				initial_mode = "normal", -- Startet im Normalmodus statt im Insertmodus
-
+				initial_mode = "normal",
+				vimgrep_arguments = {
+					"rg",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+					"--glob",
+					"!**/.git/*", -- Excludes everything inside .git
+				},
 			},
-
+			  pickers = {
+				find_files = {
+				  theme = "dropdown",
+				}
+			  },
 		})
-		-- set keymaps
-		local keymap = vim.keymap
-
-		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-		keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Fuzzy find recent files" })
-		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find string in cwd" })
-		keymap.set("n", "<leader>fs", "<cmd>Telescope git_status<cr>", { desc = "Find string under cursor in cwd" })
-		keymap.set("n", "<leader>fc", "<cmd>Telescope git commits<cr>", { desc = "Find todos" })
 	end,
 }
-
