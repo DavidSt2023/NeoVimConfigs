@@ -20,12 +20,13 @@ return {
 
 		-- Function to switch Git repositories
 		local function switch_repo()
-			local home = vim.fn.expand("~") .. "/repos" -- Change this path if needed
-
+			local home_repos = vim.fn.expand("~") .. "/repos"
+			local home_projects = "C:/Projekte"
 			-- Scan for Git repositories
-			local repos = plenary_scan.scan_dir(home, { hidden = true, depth = 2, add_dirs = true })
+			local repos_repos = plenary_scan.scan_dir(home_repos, { hidden = true, depth = 2, add_dirs = true })
+			local repos_projects = plenary_scan.scan_dir(home_projects, { hidden = true, depth = 2, add_dirs = true })
 			local git_repos = {}
-
+			local repos = vim.tbl_extend("force", repos_repos, repos_projects)
 			-- Filter only directories that contain a .git folder
 			for _, repo in ipairs(repos) do
 				if vim.fn.isdirectory(repo .. "/.git") == 1 then
@@ -34,7 +35,7 @@ return {
 			end
 
 			if #git_repos == 0 then
-				print("No Git repositories found in " .. home)
+				print("No Git repositories found in " .. home_repos .. " or " .. home_projects)
 				return
 			end
 
@@ -110,7 +111,6 @@ return {
 
 		-- Define Alpha dashboard buttons
 		dashboard.section.buttons.val = {
-			dashboard.button("<C-d>", "󱓧  Open daily-notes", ":ObsidianToday<CR>"),
 			dashboard.button("r", "󰄉  Recent files", ":Telescope oldfiles <CR>"),
 			dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy update<CR>"),
 			dashboard.button("c", "  Settings", ":e $HOME/Appdata/Local/nvim/init.lua<CR>"),

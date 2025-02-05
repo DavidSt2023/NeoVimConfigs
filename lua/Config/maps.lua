@@ -54,4 +54,23 @@ map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>', "Hint: Use k")
 map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>', "Hint: Use j")
 
 --Settings
-map("n","<leader>st","<CMD>ThemePicker<CR>","Theme auswählen")
+map("n", "<leader>st", "<CMD>ThemePicker<CR>", "Theme auswählen")
+
+--Debugger
+map("n", "<F5>", ":lua require('dap').continue()<CR>", " Continue")
+map("n", "<F10>", ":lua  require('dap').step_over()<CR>", " Step over")
+map("n", "<F11>", ":lau require('dap').step_into()<CR>", " Setp Into")
+map("n", "<F12>", ":lua require('dap').step_out()<CR>", " Step out")
+map("n", "<leader>b", ":lua require('dap').toggle_breakpoint()<CR>", " Toggle Breakpoint")
+map(
+	"n",
+	"<leader>B",
+	":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) <CR>",
+	" Set Breakpoint"
+)
+map(
+	"n",
+	"<leader>lp",
+	":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) ",
+	" Log Point"
+)
