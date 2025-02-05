@@ -59,36 +59,48 @@ return {
 		end
 
 		-- Function to load a random ASCII header
-		local function load_random_header()
-			math.randomseed(os.time())
-			local header_folder = vim.fn.stdpath("config") .. "/lua/Config/plugins/header_img/"
-			local files = vim.fn.globpath(header_folder, "*.lua", true, true)
-			if #files == 0 then
-				return nil
-			end
+local function load_random_header()
+    -- Zufallszahlengenerator nur einmal setzen, falls nicht bereits geschehen
+    if not _G.random_seeded then
+        math.randomseed(os.time())
+        _G.random_seeded = true
+    end
 
-			local random_file = files[math.random(#files)]
-			local separator = package.config:sub(1, 1)
-			local module_name = "custom.plugins.header_img." .. random_file:match("([^" .. separator .. "]+)%.lua$")
+    -- Verzeichnis mit Header-Dateien festlegen
+    local header_folder = vim.fn.stdpath("config") .. "/lua/Config/plugins/header_img/"
+    local files = vim.fn.globpath(header_folder, "*.lua", true, true)
 
-			package.loaded[module_name] = nil
+    -- Überprüfen, ob Dateien vorhanden sind
+    if #files == 0 then
+        print("Keine Header-Dateien gefunden!")
+        return nil
+    end
 
-			local ok, module = pcall(require, module_name)
-			if ok and module.header then
-				-- Add padding to the header to set a fixed height
-				local fixed_height = 2 -- Set your desired height here
-				local header_lines = module.header
-				local padding_lines = fixed_height - #header_lines
-				if padding_lines > 0 then
-					for _ = 1, padding_lines do
-						table.insert(header_lines, 1, "")
-					end
-				end
-				return header_lines
-			else
-				return nil
-			end
-		end
+    -- Zufällige Datei auswählen
+    local random_file = files[math.random(#files)]
+    local separator = package.config:sub(1, 1)
+    local module_name = "Config.plugins.header_img." .. random_file:match("([^" .. separator .. "]+)%.lua$")
+
+    -- Modul neu laden, falls es bereits im Cache ist
+    package.loaded[module_name] = nil
+
+    -- Modul laden und Fehler abfangen
+    local ok, module = pcall(require, module_name)
+	print("Versuche zu laden: " .. module_name)
+	local ok, module = pcall(require, module_name)
+	if not ok then
+		print("Fehlerdetails: " .. module)
+		return nil
+	end
+
+    -- Header zurückgeben, falls vorhanden
+    if module.header then
+        return module.header
+    else
+        print("Keine 'header' Eigenschaft im Modul: " .. module_name)
+        return nil
+    end
+end
 
 		-- Function to change the header image
 		local function change_header()
