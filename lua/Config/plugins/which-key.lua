@@ -1,32 +1,29 @@
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	opts = {},
+	opts = {
+		icons = {
+			breadcrumb = "»",
+			separator = "➜",
+			group = "-",
+		},
+	},
 	config = function()
 		local wk = require("which-key")
 		wk.add({
 			{ "<leader>t", group = "Themes" },
-			{ "<leader>o", group = " Copilot" },
-			{ "<leader>q", group = "󰈆 Quit" },
-			{ "<leader>f", group = "file" }, -- group
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
-			{ "<leader>fn", desc = "New File" },
-			{ "<leader>f1", hidden = true }, -- hide this keymap
-			{ "<leader>w", proxy = "<c-w>", group = "windows" }, -- proxy to window mappings
+			{ "<leader>q", group = " Home" },
+			{ "<leader>n", group = "Neotree", icon = "󰙅" },
+			{ "<leader>f", group = "File", icon = "󰈞" },
+			{ "<leader>d", group = "Debugger", icon = "🐞" },
+			{ "<leader>s", group = "Windows" },
+			{ "<leader>/", group = "Ui", icon = "🎨" },
 			{
 				"<leader>b",
-				group = "buffers",
+				group = "Buffers",
 				expand = function()
 					return require("which-key.extras").expand.buf()
 				end,
-			},
-			{
-				-- Nested mappings are allowed and can be added in any order
-				-- Most attributes can be inherited or overridden on any level
-				-- There's no limit to the depth of nesting
-				mode = { "n", "v" }, -- NORMAL and VISUAL mode
-				{ "<leader>q", "<cmd>q<cr>", desc = "Quit" }, -- no need to specify mode since it's inherited
-				{ "<leader>w", "<cmd>w<cr>", desc = "Write" },
 			},
 		})
 	end,

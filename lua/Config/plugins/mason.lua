@@ -8,7 +8,7 @@ return {
     },
     config = function()
         require("mason").setup()
-
+--only Listed https://github.com/williamboman/mason-lspconfig.nvim
         require("mason-lspconfig").setup({
             automatic_installation = true,
             ensure_installed = {
@@ -16,17 +16,20 @@ return {
                 "eslint",
                 "html",
                 "jsonls",
-                "pyright",
+                "ast_grep",
+                "ltex",
                 "tailwindcss",
+                
 				
             },
         })
-
+--Any
         require("mason-tool-installer").setup({
             ensure_installed = {
                 "prettier",
                 "stylua", -- lua formatter
                 "eslint_d",
+				"typescript-language-server",
 				
             },
         })
