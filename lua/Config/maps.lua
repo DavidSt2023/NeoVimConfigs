@@ -14,7 +14,7 @@ map({ "n", "v" }, "<leader>w", "<cmd>w<cr>", "⚡ Write")
 map("n", "<C-s>", "<CMD>update<CR>", "Save")
 
 -- Quit
-map("n", "<leader>Q", "<CMD>q<CR>", "Quit")
+map("n", "<leader>Q", "<CMD>quitall<CR>", "Quit")
 map("n", "<leader>qr", "<Cmd>w<Bar>Alpha<Bar>redraw!<CR>", "Dashboard with Saving")
 map("n", "<leader>qw", "<CMD>wq<CR>", "Quit with Saving")
 -- Exit insert mode
