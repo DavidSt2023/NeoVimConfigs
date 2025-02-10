@@ -23,14 +23,27 @@ return {
 			local home_repos = vim.fn.expand("~") .. "/repos"
 			local home_projects = "C:/Projekte"
 			-- Scan for Git repositories
-			local repos_repos = plenary_scan.scan_dir(home_repos, { hidden = true, depth = 2, add_dirs = true })
-			local repos_projects = plenary_scan.scan_dir(home_projects, { hidden = true, depth = 2, add_dirs = true })
+			local repos = {
+				plenary_scan.scan_dir(home_repos, { hidden = true, depth = 2, add_dirs = true }),
+				plenary_scan.scan_dir(home_projects, { hidden = true, depth = 2, add_dirs = true }),
+				vim.fn.stdpath("config"),
+			}
 			local git_repos = {}
-			local repos = vim.tbl_extend("force", repos_repos, repos_projects)
-			-- Filter only directories that contain a .git folder
-			for _, repo in ipairs(repos) do
-				if vim.fn.isdirectory(repo .. "/.git") == 1 then
-					table.insert(git_repos, repo)
+
+			-- Handle the directories returned by plenary_scan.scan_dir
+			for _, repo_list in ipairs(repos) do
+				if type(repo_list) == "table" then
+					-- If it's a table, we iterate through it
+					for _, repo in ipairs(repo_list) do
+						if vim.fn.isdirectory(repo .. "/.git") == 1 then
+							table.insert(git_repos, repo)
+						end
+					end
+				elseif type(repo_list) == "string" then
+					-- If it's a string (vim.fn.stdpath("config")), check it directly
+					if vim.fn.isdirectory(repo_list .. "/.git") == 1 then
+						table.insert(git_repos, repo_list)
+					end
 				end
 			end
 

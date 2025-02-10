@@ -3,14 +3,36 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-cmdline",
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
+		local cmp = require("cmp")
+		-- `/` cmdline setup.
+		cmp.setup.cmdline("/", {
+		  mapping = cmp.mapping.preset.cmdline(),
+		  sources = {
+			{ name = "buffer" },
+		  },
+		})
+
+		-- `:` cmdline setup.
+		cmp.setup.cmdline(":", {
+		  mapping = cmp.mapping.preset.cmdline(),
+		  sources = cmp.config.sources({
+			{ name = "path" },
+		  }, {
+			{
+			  name = "cmdline",
+			  option = {
+				ignore_cmds = { "Man", "!" },
+			  },
+			},
+		  }),
+		})
 		local nvim_lsp = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
-
 		local protocol = require("vim.lsp.protocol")
-
 		local on_attach = function(client, bufnr)
 			-- format on save
 			if client.server_capabilities.documentFormattingProvider then
