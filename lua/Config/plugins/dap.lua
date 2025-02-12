@@ -7,7 +7,7 @@ local local_js_based_languages = {
 }
 
 local dap_icons = {
-	Breakpoint = { "🛑", "DiagnosticError" },
+	Breakpoint = { "", "DiagnosticError" },
 	Stopped = { "▶️", "DiagnosticInfo" },
 	LogPoint = { "📜", "DiagnosticWarn" },
 }
@@ -28,11 +28,14 @@ return {
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
 			dapui.setup()
-			require('dap').set_log_level('DEBUG')
-			vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "DiagnosticError", linehl = "", numhl = "" })
-			vim.fn.sign_define("DapStopped", { text = "▶️", texthl = "DiagnosticInfo", linehl = "Visual", numhl = "" })
+			require("dap").set_log_level("DEBUG")
+			vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapStopped",
+				{ text = "▶️", texthl = "DiagnosticInfo", linehl = "Visual", numhl = "" }
+			)
 			vim.fn.sign_define("DapLogPoint", { text = "📜", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
-	
+
 			dap.set_log_level("DEBUG")
 			--DapUi config
 			local dap, dapui = require("dap"), require("dapui")
@@ -63,27 +66,26 @@ return {
 					vim.fn.resolve(vim.fn.stdpath("data") .. "\\lazy\\vscode-chrome-debug\\out\\src\\chromeDebug.js"),
 				},
 			}
+			require("dap.ext.vscode").load_launchjs(nil, {
+				["chrome"] = local_js_based_languages,  -- Ordne den Chrome-Adapter den JS-basierten Sprachen zu
+				["pwa-chrome"] = local_js_based_languages,
+			})
 
 			for _, language in ipairs(local_js_based_languages) do
 				dap.configurations[language] = {
 					{
-						type = "pwa-chrome",
+						type = "chrome",
 						request = "launch",
-						name = 'Start Chrome with "localhost"',
-						url = "http://localhost:5173",
-						webRoot = "${workspaceFolder}",
-						trace = true,
+						name = "Launch Chrome with Debugging",
+						url = function()
+							local input = vim.fn.input("Enter Debug Port: ", "3000")
+							return input ~= "" and "http://localhost:" .. input or "http://localhost:3006"
+						end,
+ 						webRoot = "${workspaceFolder}",
+						userDataDir = true, -- Nutzt die normale Chrome-Instanz
+						port = 9222,
 					},
 					{ name = "--Project Options --" },
-				  {
-					type = "chrome",
-					request = "launch",
-					name = "Launch Chrome with Debugging",
-					url = "http://localhost:5173",
-					webRoot = "${workspaceFolder}",
-					userDataDir = true, -- Nutzt die normale Chrome-Instanz
-					port = 9222,
-				  },
 				}
 			end
 		end,
@@ -124,10 +126,13 @@ return {
 				desc = "Toggle Breakpoint",
 			},
 			{
-			'<Leader>dB',
-			function() require('dap').set_breakpoint() end,
-			desc = "set Breakpoint",
+				"<Leader>dB",
+				function()
+					require("dap").set_breakpoint()
+				end,
+				desc = "set Breakpoint",
 			},
 		},
+
 	},
 }
