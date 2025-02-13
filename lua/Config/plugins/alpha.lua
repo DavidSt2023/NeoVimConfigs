@@ -99,8 +99,6 @@ return {
 
 			-- Modul laden und Fehler abfangen
 			local ok, module = pcall(require, module_name)
-			print("Versuche zu laden: " .. module_name)
-			local ok, module = pcall(require, module_name)
 			if not ok then
 				print("Fehlerdetails: " .. module)
 				return nil

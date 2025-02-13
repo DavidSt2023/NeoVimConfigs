@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ import = "Config.plugins" },
 	{ import = "Config.plugins.colorschemes" },
+	{ import = "Config.Debugger" },
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {

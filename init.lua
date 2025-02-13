@@ -1,6 +1,6 @@
 require("Config.settings")
-require("Config.maps") -- key bindings
 require("Config.lazy")
+require("Config.maps") -- key bindings
 
 
 local tools_dir = vim.fn.stdpath('config') .. '/lua/Config/Tools/'
