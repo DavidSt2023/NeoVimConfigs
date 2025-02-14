@@ -9,14 +9,17 @@ return {
             version = "v2.*",
             -- install jsregexp (optional!).
             build = "make install_jsregexp",
+			dependencies = { "rafamadriz/friendly-snippets" },
         },
         "rafamadriz/friendly-snippets",
+		"folke/neodev.nvim",
         "onsails/lspkind.nvim", -- vs-code like pictograms
     },
     config = function()
         local cmp = require("cmp")
         local lspkind = require("lspkind")
         local luasnip = require("luasnip")
+		require("neodev").setup({})
 
         require("luasnip.loaders.from_vscode").lazy_load()
 
