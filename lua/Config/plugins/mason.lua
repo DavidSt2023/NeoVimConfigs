@@ -3,6 +3,8 @@ return {
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"mason-org/mason-registry",
 	},
 	config = function()
 		require("mason").setup()
@@ -19,11 +21,14 @@ return {
 				"cssls",
 				"eslint",
 				"html",
-				"jsonls",
-				"ast_grep",
+				"lua_ls",
+				"ts_ls",
+				"jdtls",
 				"ltex",
 				"tailwindcss",
+				"jdtls",
 			},
 		})
+
 	end,
 }

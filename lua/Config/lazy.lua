@@ -16,8 +16,10 @@ vim.g.maplocalleader = " "
 
 require("lazy").setup({
 	{ import = "Config.plugins" },
+	{ import = "Config.debugger" },
 	{ import = "Config.plugins.colorschemes" },
-	{ import = "Config.Debugger" },
+	{ import = "Config.syntax" },
+
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
