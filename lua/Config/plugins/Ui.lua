@@ -5,7 +5,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     options = { theme = 'slanted-gaps' },
     config = function()
-      require("lualine").setup()
+      require("lualine").setup({})
     end,
   },
   {
