@@ -9,7 +9,6 @@ return {
 			local dap, dapui = require("dap"), require("dapui")
 			require("nvim-dap-virtual-text").setup()
 			dapui.setup()
-			dap.set_log_level("DEBUG")
 
 			vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError", linehl = "", numhl = "" })
 			vim.fn.sign_define(
@@ -31,8 +30,13 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				dapui.close()
 			end
-
-			-- Adapter konfigurieren
-			require("Config.Debugger.dap_adapters")
+			
+			local language = vim.bo.filetype
+			if language == "typescript" or language == "javascript" then 
+			require("Config.Debugger.js_dap_adapter")
+			elseif language == "java" then
+			else
+			print("Lanuage not configert")
+			end
 		end,
 }

@@ -75,12 +75,6 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["tsserver"] = function()
-				nvim_lsp["pyright"].setup({
-					on_attach = on_attach,
-					capabilities = capabilities,
-				})
-			end,
 
 			["ast_grep"] = function()
 				nvim_lsp["ast_grep"].setup({
