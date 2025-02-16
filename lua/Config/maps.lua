@@ -81,3 +81,6 @@ map("n", "<F10>", dap.step_over, "Step Over")
 map("n", "<F11>", dap.step_into, "Step Into")
 map("n", "<F12>", dap.step_out, "Step Out")
 map("n", "<leader>dC", "<CMD>DapPicker<CR>", "Select Config")
+
+--Format
+map("n","<leader>fw", vim.lsp.buf.format ,"Format File")

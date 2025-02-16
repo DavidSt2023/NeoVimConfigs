@@ -34,17 +34,9 @@ return {
 		local mason_lspconfig = require("mason-lspconfig")
 		local protocol = require("vim.lsp.protocol")
 		local on_attach = function(client, bufnr)
-			-- format on save
-			if client.server_capabilities.documentFormattingProvider then
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					group = vim.api.nvim_create_augroup("Format", { clear = true }),
-					buffer = bufnr,
-					callback = function()
-						vim.lsp.buf.format()
-					end,
-				})
-			end
+			client.server_capabilities.documentFormattingProvider = false
 		end
+
 
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		mason_lspconfig.setup_handlers({
@@ -83,7 +75,7 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["pyright"] = function()
+			["tsserver"] = function()
 				nvim_lsp["pyright"].setup({
 					on_attach = on_attach,
 					capabilities = capabilities,

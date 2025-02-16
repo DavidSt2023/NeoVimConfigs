@@ -7,7 +7,7 @@ return {
 		},
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
-
+			require("nvim-dap-virtual-text").setup()
 			dapui.setup()
 			dap.set_log_level("DEBUG")
 
