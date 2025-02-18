@@ -8,14 +8,16 @@ return {
   config = function()
     local dap, dapui = require("dap"), require("dapui")
     dapui.setup()
+
     require("nvim-dap-virtual-text").setup({
       virtual_text = true,
       underline = true,
       signs = true,
       update_on_change = true,
-      all_frames = true,
-      virt_text_pos = "eol",
+      all_frames = true,       -- Sehr gut, da dies alle Stack Frames abdeckt
+      virt_text_pos = "overlay", -- Versuche dies, um die Textplatzierung zu ändern
     })
+
 
     -- Dap UI Auto-Open / Close
     dap.listeners.before.attach.dapui_config = function()

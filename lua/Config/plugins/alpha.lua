@@ -141,9 +141,7 @@ return {
 			end),
 			dashboard.button("g", "󰊢  Open LazyGit", "<cmd>LazyGit<CR>"),
 			dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy update<CR>"),
-			dashboard.button("t", "🖮  Practice typing with Typr ", "<cmd>Typr<CR>"),
-			dashboard.button("V", "  Vim Practice ", "<cmd>OpenURL https://vim-racer.com/<CR>"),
-			dashboard.button("c", "  Settings", ":e $HOME/Appdata/Local/nvim/init.lua<CR>"),
+			dashboard.button("c", "  Settings", ":e $HOME/Appdata/Local/nvim/lua/Config/settings.lua<CR>"),
 			dashboard.button("Q", "  Quit ", "<cmd>q!<CR>"),
 		}
 

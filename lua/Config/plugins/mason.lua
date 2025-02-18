@@ -29,6 +29,10 @@ return {
 				"jdtls",
 			},
 		})
-
+  require("mason-tool-installer").setup({
+    ensure_installed = {
+      "prettier",
+      },
+    })
 	end,
 }

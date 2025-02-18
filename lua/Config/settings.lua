@@ -30,3 +30,4 @@ o.sidescroll = 1      -- Scrollt horizontal, sobald nötig
 o.sidescrolloff = 5   -- Hält 5 Zeichen Puffer beim Scrollen
 o.scroll = 1      -- Scrollt , sobald nötig
 o.scrolloff = 5   -- Hält 5 Zeichen Puffer beim Scrollen
+o.mouse = "a" -- Enable the use of the mouse. "a" you can use on all modes
