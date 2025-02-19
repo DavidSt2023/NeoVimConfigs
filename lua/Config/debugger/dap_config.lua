@@ -36,5 +36,6 @@ return {
 
     require("Config.debugger.adapters.js_dap_adapter").configure_js_adapter()
     require("Config.debugger.adapters.java_dap_adapter").setupJava()
+
   end,
 }

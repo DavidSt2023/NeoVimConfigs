@@ -4,7 +4,6 @@ return {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    'mfussenegger/nvim-jdtls',
   },
   config = function()
     local lspconfig = require('lspconfig')
@@ -26,6 +25,8 @@ return {
         ('--jvm-arg=-javaagent:%s'):format(vim.fn.expand'C:/Users/dstemmler/AppData/Local/nvim-data/mason/packages/jdtls/lombok.jar')
       }
     })
+    end
+
     -- Lua LSP-Setup (Lua Language Server)
     lspconfig["lua_ls"].setup({
       capabilities = capabilities,
@@ -44,6 +45,10 @@ return {
       on_attach = on_attach,
     })
 
+    lspconfig.jdtls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
 
     lspconfig["cssls"].setup({
       capabilities = capabilities,
@@ -53,4 +58,5 @@ return {
       capabilities = capabilities,
     })
   end
+}
 }

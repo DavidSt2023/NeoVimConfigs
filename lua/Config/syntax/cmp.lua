@@ -18,6 +18,7 @@ return {
       'mfussenegger/nvim-jdtls',
       dependencies = 'hrsh7th/cmp-nvim-lsp',
     },
+
   },
   config = function()
     local cmp = require('cmp')
@@ -41,7 +42,7 @@ return {
         { name = 'luasnip' },
         { name = 'lazydev' },
         { name = 'buffer' },
-      }, {
+      },{
         { name = 'buffer' },
       }),
     })

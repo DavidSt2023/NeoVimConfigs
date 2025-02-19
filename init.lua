@@ -1,12 +1,12 @@
 require("Config.settings")
 require("Config.lazy")
-require("Config.maps") -- key bindings
+require("Config.maps")
 
-local tools_dir = vim.fn.stdpath("config") .. "/lua/Config/Tools/"
+local tools_dir = vim.fn.stdpath("config") .. "/lua/Config/tools/"
 local files = vim.fn.globpath(tools_dir, "*.lua", false, true)
 
 for _, file in ipairs(files) do
-	local module_name = "Config.Tools." .. vim.fn.fnamemodify(file, ":t:r") -- Entfernt den Pfad und .lua-Endung
+	local module_name = "Config.tools." .. vim.fn.fnamemodify(file, ":t:r") -- Entfernt den Pfad und .lua-Endung
 	require(module_name)
 end
 --set Theme

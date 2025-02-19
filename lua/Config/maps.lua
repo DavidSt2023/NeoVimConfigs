@@ -1,14 +1,18 @@
--- v/nvim/lua/slydragonn/maps.lua
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local Telescope = require("telescope")
 
+
+local dap, dapUi = require("dap"), require("dapui")
+
+
+
 local map = function(mode, keys, func, desc, opts)
-	opts = opts or {}
-	opts.desc = desc
-	vim.keymap.set(mode, keys, func, opts)
+  opts = opts or {}
+  opts.desc = desc
+  vim.keymap.set(mode, keys, func, opts)
 end
 
 -- Save
@@ -71,8 +75,9 @@ map("n", "<leader>fs", "<cmd>write<cr>", "Save File")
 map("n", "<leader>fR", "<cmd>edit %<cr>", "Reload File")
 
 --Dap
-local dap = require("dap")
+
 map("n", "<leader>dc", dap.continue, "Start Debugger")
+map("n", "<F9>", dap.continue, "Continue")
 map("n", "<leader>dl", function()
   dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 end, "Log Point")
@@ -80,7 +85,24 @@ map("n", "<leader>db", dap.toggle_breakpoint, "Toggle Breakpoint")
 map("n", "<F10>", dap.step_over, "Step Over")
 map("n", "<F11>", dap.step_into, "Step Into")
 map("n", "<F12>", dap.step_out, "Step Out")
-map("n", "<leader>dC", "<CMD>DapPicker<CR>", "Select Config")
+map("n", "<leader>dt", dapUi.toggle, "Toggle Ui")
+map("n", "<leader>dw", function()
+  vim.ui.input({ promt = "Watch Expression: " }, function(input)
+    if input then
+      dapUi.elements.watches.add(input)
+    end
+  end)
+end, "Add Watch")
+map("n", "<leader>dr", dapUi.elements.watches.remove, "Remove Watch")
+
+map("n", "<leader>dB", function()
+  vim.ui.input({ promt = "Enter Condition: " }, function(input)
+    if input then
+      dap.set_breakpoint(input)
+    end
+  end)
+end, "Conditional Breakpoint")
+map("n","<leader>dm",dap.clear_breakpoints,"Clear Breakpoints")
 
 --Format
-map("n","<leader>fw", vim.lsp.buf.format ,"Format File")
+map("n", "<leader>fw", vim.lsp.buf.format, "Format File")

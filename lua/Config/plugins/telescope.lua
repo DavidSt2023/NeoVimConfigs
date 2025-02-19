@@ -1,30 +1,31 @@
 return {
-	"nvim-telescope/telescope.nvim",
-	tag = "0.1.6",
-	dependencies = { "nvim-lua/plenary.nvim","nvim-telescope/telescope-live-grep-args.nvim" },
-	config = function()
-	local telescope = require("telescope")
-		telescope.setup({
-			defaults = {
-				selection_caret = "󱞩 ",
-				initial_mode = "normal",
-				vimgrep_arguments = {
-					"rg",
-					"--color=never",
-					"--no-heading",
-					"--with-filename",
-					"--line-number",
-					"--column",
-					"--smart-case",
-					"--glob",
-				},
-			},
-			  pickers = {
-				find_files = {
-				  theme = "dropdown",
-				}
-			  },
-		})
-		 telescope.load_extension("live_grep_args")
-	end,
+  "nvim-telescope/telescope.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  },
+  config = function()
+    local telescope = require("telescope")
+    telescope.setup({
+      defaults = {
+        initial_mode = "normal",
+        file_ignore_patterns = { ".git/.*", "node_modules/.*", "%.lock" },
+      },
+      pickers = {
+        find_files = {
+          theme = "dropdown",
+        }
+      },
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case",
+        },
+      },
+    })
+    telescope.load_extension("fzf")
+  end,
 }
