@@ -4,6 +4,8 @@ return {
     { "rcarriga/nvim-dap-ui" },
     { "nvim-neotest/nvim-nio" },
     { "theHamsta/nvim-dap-virtual-text" },
+    {"mfussenegger/nvim-jdtls" ,dependencies={'mfussenegger/nvim-dap'}},
+    {"eclipse-jdtls/eclipse.jdt.ls" ,build= './mvnw clean verify  -DskipTests=true'},
   },
   config = function()
     local dap, dapui = require("dap"), require("dapui")
@@ -35,7 +37,6 @@ return {
 
 
     require("Config.debugger.adapters.js_dap_adapter").configure_js_adapter()
-    require("Config.debugger.adapters.java_dap_adapter").setupJava()
 
   end,
 }

@@ -19,14 +19,6 @@ return {
       vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references, {})
       vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {})
     end
-    require'jdtls'.start_or_attach({
-    cmd = {
-        vim.fn.expand'C:/Users/dstemmler/AppData/Local/nvim-data/mason/bin/jdtls',
-        ('--jvm-arg=-javaagent:%s'):format(vim.fn.expand'C:/Users/dstemmler/AppData/Local/nvim-data/mason/packages/jdtls/lombok.jar')
-      }
-    })
-    end
-
     -- Lua LSP-Setup (Lua Language Server)
     lspconfig["lua_ls"].setup({
       capabilities = capabilities,
@@ -58,5 +50,4 @@ return {
       capabilities = capabilities,
     })
   end
-}
 }
