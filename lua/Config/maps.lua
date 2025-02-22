@@ -114,3 +114,5 @@ map("n", "<leader>de", function() dapUi.eval(customInput("Variable:"))  end, "Ev
 
 --Format
 map("n", "<leader>fw", vim.lsp.buf.format, "Format File")
+--Markdown
+map("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", "Markdown Preview")
