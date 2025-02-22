@@ -6,5 +6,5 @@
 - [luaRock](https://luarocks.org/)
 
 ### Lazy build failed ? 
-- check failed build and look at code some installion might time out depending on your maschine
+- check failed build and look at code some installion might time out depending on your maschine install them manualy by useing the build command
 
