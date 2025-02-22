@@ -5,6 +5,18 @@
 - [Node.js](https://nodejs.org/en/download/)
 - [luaRock](https://luarocks.org/)
 
+### [Chocolaty](https://chocolatey.org/install#individual) commands
+```sh
+choco install python --pre
+&&
+choco install microsoft-openjdk-21
+&&
+choco install maven
+&&
+choco install nodejs
+&&
+choco install luarocks
+```
 ### Lazy build failed ? 
 - check failed build and look at code some installion might time out depending on your maschine install them manualy by useing the build command
 
