@@ -5,6 +5,8 @@ return {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
+    'hrsh7th/cmp-cmdline', -- Füge cmp-cmdline hinzu
+    'hrsh7th/cmp-buffer',
     {
       'folke/lazydev.nvim',
       ft = 'lua', -- only load on lua files
@@ -18,7 +20,6 @@ return {
       'mfussenegger/nvim-jdtls',
       dependencies = 'hrsh7th/cmp-nvim-lsp',
     },
-
   },
   config = function()
     local cmp = require('cmp')
@@ -45,6 +46,22 @@ return {
       },{
         { name = 'buffer' },
       }),
+    })
+
+    -- Setup cmdline for ':'
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'cmdline' }
+      }
+    })
+
+    -- Setup cmdline for '/'
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' }
+      }
     })
   end
 }

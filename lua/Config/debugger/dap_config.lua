@@ -9,7 +9,40 @@ return {
   },
   config = function()
     local dap, dapui = require("dap"), require("dapui")
-    dapui.setup()
+    dapui.setup({
+      icons = { expanded = "▾", collapsed = "▸" },
+      mappings = {
+        -- Use a table to apply multiple mappings
+        expand = { "<CR>", "<2-LeftMouse>" },
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+      },
+      sidebar = {
+        open_on_start = true,
+        elements = {
+          -- You can change the order of elements in the sidebar
+          "scopes",
+          "breakpoints",
+          "stacks",
+          "watches",
+        },
+        width = 40,
+        position = "left", -- Can be "left" or "right"
+      },
+      tray = {
+        open_on_start = true,
+        elements = { "repl" },
+        height = 10,
+        position = "bottom", -- Can be "bottom" or "top"
+      },
+      floating = {
+        max_height = nil, -- These can be integers or a float between 0 and 1.
+        max_width = nil, -- Floats will be treated as percentage of your screen.
+      },
+      windows = { indent = 1 },
+    })
 
     require("nvim-dap-virtual-text").setup({
       virtual_text = true,
@@ -17,7 +50,6 @@ return {
       signs = true,
       update_on_change = true,
       all_frames = true,       -- Sehr gut, da dies alle Stack Frames abdeckt
-      virt_text_pos = "overlay", -- Versuche dies, um die Textplatzierung zu ändern
     })
 
 
