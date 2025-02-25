@@ -16,8 +16,8 @@ local dap, dapUi = require("dap"), require("dapui")
 
 
 
-local function customInput(prompt)
-  local input = vim.ui.input({prompt = prompt},function(input) return input end)
+local function customInput(prompt,fn)
+  local input = vim.ui.input({prompt = prompt},function(input) fn(input) end)
   return input ~= "" and input or nil
 end
 
@@ -104,13 +104,13 @@ map("n", "<F12>", dap.step_out, "Step Out")
 
 map("n", "<leader>dt", dapUi.toggle, "Toggle Ui")
 
-map("n", "<leader>dw", function() dapUi.elements.watches.add(customInput("Variable")) end, "Add Watch")
+map("n", "<leader>dw", function() customInput("Variable",dapUi.elements.watches.add) end, "Add Watch")
 
-map("n", "<leader>dB", function()   dap.set_breakpoint(nil, nil, customInput("Condition: ")) end, "Conditional Breakpoint")
+map("n", "<leader>dB", function()customInput("Breakpoint Condition:",dap.set_breakpoint) end, "Conditional Breakpoint")
 
 map("n", "<leader>dm", dap.clear_breakpoints, "Clear Breakpoints")
 
-map("n", "<leader>de", function() dapUi.eval(customInput("Variable:"))  end, "Evaluate Expression")
+map("n", "<leader>de", function() customInput("Variable:",dapUi.eval)  end, "Evaluate Expression")
 
 --Format
 map("n", "<leader>fw", vim.lsp.buf.format, "Format File")

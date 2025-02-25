@@ -1,5 +1,4 @@
 local dap = require("dap")
-
 local local_js_based_languages = {
   "typescript",
   "javascript",
@@ -18,6 +17,10 @@ function M.configure_js_adapter()
     executable = {
       command = "node",
       args = { vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "9229" },
+      options = {
+        detached = true,
+        stdio = nil
+      }
     }
   }
 
@@ -38,21 +41,21 @@ function M.configure_js_adapter()
         type = "pwa-chrome",
         request = "launch",
         name = "Launch Chrome with Debugging",
-						url = function()
-							local co = coroutine.running()
-							return coroutine.create(function()
-								vim.ui.input({
-									prompt = "Enter Port: ",
-									default = "3006",
-								}, function(url)
-									if url == nil or url == "" then
-										return
-									else
-										coroutine.resume(co, "http://localhost:"..url)
-									end
-								end)
-							end)
-						end,
+        url = function()
+          local co = coroutine.running()
+          return coroutine.create(function()
+            vim.ui.input({
+              prompt = "Enter Port: ",
+              default = "3006",
+            }, function(url)
+              if url == nil or url == "" then
+                return
+              else
+                coroutine.resume(co, "http://localhost:" .. url)
+              end
+            end)
+          end)
+        end,
         webRoot = "${workspaceFolder}",
       },
       {
