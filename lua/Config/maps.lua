@@ -114,5 +114,9 @@ map("n", "<leader>de", function() customInput("Variable:",dapUi.eval)  end, "Eva
 
 --Format
 map("n", "<leader>fw", vim.lsp.buf.format, "Format File")
+
 --Markdown
 map("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", "Markdown Preview")
+
+--Navigation
+map("n", "<leader>nt",  function() vim.cmd("vsplit " .. vim.fn.stdpath("config") .. "/ToDo.md") end,"Open Todo" )

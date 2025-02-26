@@ -32,3 +32,4 @@ o.scroll = 1      -- Scrollt , sobald nötig
 o.scrolloff = 5   -- Hält 5 Zeichen Puffer beim Scrollen
 o.laststatus = 3
 o.splitkeep = "screen"
+o.guifont = "FiraCode Nerd Font:h12"

@@ -142,6 +142,7 @@ return {
 			dashboard.button("g", "󰊢  Open LazyGit", "<cmd>LazyGit<CR>"),
 			dashboard.button("u", "󱐥  Update plugins", "<cmd>Lazy update<CR>"),
 			dashboard.button("c", "  Settings", ":e $HOME/Appdata/Local/nvim/lua/Config/settings.lua<CR>"),
+			dashboard.button("t", "  ToDo", function() vim.cmd("vsplit " .. vim.fn.stdpath("config") .. "/ToDo.md") end),
 			dashboard.button("Q", "  Quit ", "<cmd>q!<CR>"),
 		}
 
