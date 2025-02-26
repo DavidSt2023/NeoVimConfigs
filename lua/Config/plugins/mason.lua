@@ -29,5 +29,13 @@ return {
         "jdtls",
       },
     })
+    require("mason-tool-installer").setup({
+      automatic_installation = true,
+      ensure_installed = {
+        "stylua",
+        "prettier",
+        "google-java-format"
+    },
+    })
   end,
 }

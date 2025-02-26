@@ -13,7 +13,7 @@ return {
 	opts = {
 		filesystem = {
 			window = {
-				position = "left",
+				position = "right",
 			},
 
 			mappings = {

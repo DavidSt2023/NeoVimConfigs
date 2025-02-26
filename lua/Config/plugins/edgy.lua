@@ -1,5 +1,6 @@
 return {
   "folke/edgy.nvim",
+  --echo bufname('%')
   opts = {
     left = { -- Fenster, die rechts angezeigt werden sollen
       {
@@ -23,8 +24,14 @@ return {
         size = { height = 0.1 }
       },
     },
-    bottom = { -- Fenster, die unten angezeigt werden sollen
-
+    right = {
+      {
+        ft = "neo-tree",
+        title = "File Explorer",
+        size = { width = 0.2 },
+      },
+    },
+    bottom = {
       {
         ft = "dap-repl",
         title = "REPL",
@@ -36,6 +43,22 @@ return {
         title = "Scopes",
         size = { height = 0.2 }
       },
-    }
+    },
+    animate = {
+      enable = true,
+      fps = 120,
+      spinner = {
+        frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+        interval = 80,
+      },
+    },
+    wo = {
+      winbar = true,
+      winfixwidth = true,
+      winfixheight = false,
+      winhighlight = "WinBar:EdgyWinBar,Normal:EdgyNormal",
+      spell = false,
+      signcolumn = "no",
+    },
   },
 }

@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -16,8 +15,8 @@ local dap, dapUi = require("dap"), require("dapui")
 
 
 
-local function customInput(prompt,fn)
-  local input = vim.ui.input({prompt = prompt},function(input) fn(input) end)
+local function customInput(prompt, fn)
+  local input = vim.ui.input({ prompt = prompt }, function(input) fn(input) end)
   return input ~= "" and input or nil
 end
 
@@ -60,30 +59,27 @@ map("n", "<leader>/a", "<CMD>Copilot <CR>", "Aktivate Copilot")
 map("n", "<leader>/c", "<CMD>CopilotChat <CR>", "Copilot Chat")
 map("n", "<leader>/f", "<CMD>CopilotChatFix <CR>", "Copilot Chat")
 map("n", "<leader>/o", "<CMD>CopilotChatOptimize <CR>", "Copilot Chat")
-map('n', '<leader>/ca', 'copilot#Accept("<CR>")',"Accept Copilot")
---Reminders
-map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>', "Hint: Use h")
-map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>', "Hint: Use l")
-map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>', "Hint: Use k")
-map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>', "Hint: Use j")
+map('n', '<leader>/ca', 'copilot#Accept("<CR>")', "Accept Copilot")
+
 
 --Settings
 map("n", "<leader>/t", "<CMD>ThemePicker<CR>", "Theme auswählen")
-map("n", "<leader>bn", "<cmd>BufferLineCycleNext<cr>", "Next Buffer")
 
 --Telescope
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", "Find File")
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", "Buffers")
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", "Recent  files")
-map("n", "<leader>fv", "<cmd>Telescope live_grep<cr>", "Search Variable")
-map("n", "<leader>fV", function() telescope.live_grep({additional_args = function()return {"-w"} end}) end, "Search Whole Variable")
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", "Help Tags")
-map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", "Keymaps")
-map("n", "<leader>fc", "<cmd>Telescope commands<cr>", "Commands")
+map("n", "<leader>tf", "<cmd>Telescope find_files<cr>", "Find File")
+map("n", "<leader>tb", "<cmd>Telescope buffers<cr>", "Buffers")
+map("n", "<leader>tr", "<cmd>Telescope oldfiles<cr>", "Recent  files")
+map("n", "<leader>tv", "<cmd>Telescope live_grep<cr>", "Search Variable")
+map("n", "<leader>tV", function() telescope.live_grep({ additional_args = function() return { "-w" } end }) end,
+  "Search Whole Variable")
+map("n", "<leader>th", "<cmd>Telescope help_tags<cr>", "Help Tags")
+map("n", "<leader>tk", "<cmd>Telescope keymaps<cr>", "Keymaps")
+map("n", "<leader>tc", "<cmd>Telescope commands<cr>", "Commands")
 
 --File Mangament
 map("n", "<leader>fR", "<cmd>edit %<cr>", "Reload File")
 
+map("n", "<leader>fw", vim.lsp.buf.format, "Format File")
 --Dap
 
 map("n", "<leader>dc", dap.continue, "Start Debugger")
@@ -104,19 +100,21 @@ map("n", "<F12>", dap.step_out, "Step Out")
 
 map("n", "<leader>dt", dapUi.toggle, "Toggle Ui")
 
-map("n", "<leader>dw", function() customInput("Variable",dapUi.elements.watches.add) end, "Add Watch")
+map("n", "<leader>dw", function() customInput("Variable", dapUi.elements.watches.add) end, "Add Watch")
 
-map("n", "<leader>dB", function()customInput("Breakpoint Condition:",dap.set_breakpoint) end, "Conditional Breakpoint")
+map("n", "<leader>dB", function() customInput("Breakpoint Condition:", dap.set_breakpoint) end, "Conditional Breakpoint")
 
 map("n", "<leader>dm", dap.clear_breakpoints, "Clear Breakpoints")
 
-map("n", "<leader>de", function() customInput("Variable:",dapUi.eval)  end, "Evaluate Expression")
+map("n", "<leader>de", function() customInput("Variable:", dapUi.eval) end, "Evaluate Expression")
 
---Format
-map("n", "<leader>fw", vim.lsp.buf.format, "Format File")
 
 --Markdown
 map("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", "Markdown Preview")
 
 --Navigation
-map("n", "<leader>nt",  function() vim.cmd("vsplit " .. vim.fn.stdpath("config") .. "/ToDo.md") end,"Open Todo" )
+map("n", "<leader>nt", function() vim.cmd("vsplit " .. vim.fn.stdpath("config") .. "/ToDo.md") end, "Open Todo")
+
+--Git
+map("n", "<leader>gt", "<CMD>Gitsigns blame<CR>", "Git Blame Toggle")
+

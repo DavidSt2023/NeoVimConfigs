@@ -10,11 +10,11 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = true
-      vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {})
-      vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {})
+      vim.keymap.set('n', '<leader>fn', '<cmd>lua vim.lsp.buf.rename()<CR>', {})
+      vim.keymap.set('n', '<leader>fa', '<cmd>lua vim.lsp.buf.code_action()<CR>', {})
       vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {})
       vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {})
-      vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>",
+      vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>ff", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>",
         { noremap = true, silent = true })
       vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references, {})
       vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {})
