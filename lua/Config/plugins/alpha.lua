@@ -4,7 +4,6 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
-		local telescope_builtin = require("telescope.builtin")
 		local plenary_scan = require("plenary.scandir")
 		local pickers = require("telescope.pickers")
 		local finders = require("telescope.finders")
@@ -20,8 +19,8 @@ return {
 
 		-- Function to switch Git repositories
 		local function switch_repo()
-			local home_repos = vim.fn.expand("~") .. "/repos"
-			local home_projects = "C:/Projekte"
+			local home_repos = 	"C:\\Users\\dstemmler\\repos"
+      local home_projects = "C:/Projekte"
 			-- Scan for Git repositories
 			local repos = {
 				plenary_scan.scan_dir(home_repos, { hidden = true, depth = 2, add_dirs = true }),

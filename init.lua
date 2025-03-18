@@ -1,7 +1,6 @@
 require("Config.settings")
 require("Config.lazy")
 require("Config.maps")
-
 local tools_dir = vim.fn.stdpath("config") .. "/lua/Config/tools/"
 local files = vim.fn.globpath(tools_dir, "*.lua", false, true)
 
@@ -16,6 +15,7 @@ vim.cmd("colorscheme " .. Theme)
 --edgy settings
 vim.opt.splitkeep = "screen"
 vim.opt.laststatus = 3
+
 
 vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = '#993939' })
 vim.api.nvim_set_hl(0, 'DapBreakpointStoped', { fg = '#ffbe10' })

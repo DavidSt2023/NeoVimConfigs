@@ -27,7 +27,7 @@ map("n", "<C-s>", "<CMD>update<CR>", "Save")
 -- Quit
 map("n", "<leader>Q", "<CMD>quitall!<CR>", "Quit")
 map("n", "<leader>qr", "<Cmd>w<Bar>Alpha<Bar>redraw!<CR>", "Dashboard with Saving")
-map("n", "<leader>qq", "<Cmd>q!<CR>", "Quit without Saving")
+map("n", "<leader>qq", "<Cmd>bd<CR>", "Quit without Saving")
 map("n", "<leader>qw", "<CMD>wq<CR>", "Quit with Saving")
 -- Exit insert mode
 map("i", "jk", "<ESC>", "Exit Insert Mode")
@@ -108,13 +108,25 @@ map("n", "<leader>dm", dap.clear_breakpoints, "Clear Breakpoints")
 
 map("n", "<leader>de", function() customInput("Variable:", dapUi.eval) end, "Evaluate Expression")
 
+map("n", "<F4>", "<cmd>:lua get_dap_var_under_cursor()<CR>", "Get dap Variable under Cursor")
+map("n", "<F3>","<cmd>:lua get_ts_var_under_cursor()<CR>", "Get Ts Variable under Cursor")
+
 
 --Markdown
 map("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", "Markdown Preview")
 
 --Navigation
 map("n", "<leader>nt", function() vim.cmd("vsplit " .. vim.fn.stdpath("config") .. "/ToDo.md") end, "Open Todo")
+map("n","U","<CMD>redo<CR>",'Redo')
+map("n",    "<Tab>",         ">>",  "Indent Line")
+map("n",    "<S-Tab>",       "<<",  "Unindent Line")
+map("v",    "<Tab>",         ">gv", "Indent Selection")
+map("v",    "<S-Tab>",       "<gv", "Unindent Selection")
+map("i",    "<S-Tab>",       "<BS>", "Unindent Insert")
+
+--Term
+map("n","<F12>","<CMD>ToggleTerm<CR>")
 
 --Git
-map("n", "<leader>gt", "<CMD>Gitsigns blame<CR>", "Git Blame Toggle")
+map({"n","t"}, "<leader>gt", "<CMD>Gitsigns blame<CR>", "Git Blame Toggle")
 

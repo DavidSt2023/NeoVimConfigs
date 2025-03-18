@@ -34,17 +34,6 @@ return {
 				["<C-o>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<Tab>"] = cmp.mapping(function(fallback)
-					-- Tab accepts the completion if CMP menu is visible and one item is selected
-					-- If not it will send the action for Snippets or others (Copilot)
-					if cmp.visible() and cmp.get_selected_entry() then
-						cmp.confirm({ select = true })
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
 			}),
 			snippet = {
 				expand = function(args)

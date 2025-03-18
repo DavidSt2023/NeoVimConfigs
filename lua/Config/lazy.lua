@@ -15,6 +15,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("lazy").setup({
+  {"LazyVim/LazyVim"},
 	{ import = "Config.plugins" },
 	{ import = "Config.plugins.colorschemes" },
 	{ import = "Config.syntax" },

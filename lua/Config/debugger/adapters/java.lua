@@ -4,14 +4,10 @@ function M.setup()
 	local dap = require("dap")
 
 	dap.adapters.java = function(callback)
-		-- This will be called when dap.continue() is called for a Java debugging session
 		callback({
 			type = "server",
 			host = "127.0.0.1",
-			port =  vim.fn.expand("${port}"), -- The JDTLS will automatically forward the debug server port
-			executable = {
-				command = vim.fn.exepath("java"),
-			},
+			port = 5005, -- Fester Port statt ${port}
 		})
 	end
 
@@ -23,25 +19,22 @@ function M.setup()
 			hostName = "127.0.0.1",
 			port = 5005,
 		},
-	}
-
-	dap.configurations.java = {
 		{
 			type = "java",
-			request = "launch", -- Ändere von 'attach' auf 'launch'
+			request = "launch",
 			name = "Debug (Launch) - Main Class",
-			mainClass = "src.main.java.Main", -- Hier deine Hauptklasse angeben (z.B. com.example.Main)
-			args = "", -- Optionale Argumente für das Main-Class
-			cwd = vim.fn.getcwd(), -- Setzt das Arbeitsverzeichnis auf das aktuelle Verzeichnis
-			projectName = "DeinProjektName", -- Optional, falls du den Projektnamen angeben möchtest
+			mainClass = "${command:PickMainClass}", -- Dynamische Auswahl der Hauptklasse
+			projectName = "${command:PickJavaProject}", -- Dynamische Auswahl des Projekts
+			cwd = "${workspaceFolder}",
 		},
 	}
+
 	-- Register the vscode-java-debug extension
 	local jdtls = require("jdtls")
 	local bundles = {
 		vim.fn.glob(
 			vim.fn.stdpath("data")
-          .. "/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
+				.. "/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
 		),
 	}
 

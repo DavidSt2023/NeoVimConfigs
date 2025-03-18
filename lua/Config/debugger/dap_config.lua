@@ -11,13 +11,7 @@ return {
     local dap, dapui = require("dap"), require("dapui")
     dap.set_log_level("TRACE")
 
-    dapui.setup({
-      expand_lines = true,
-      render = {
-        max_type_length = nil,
-        max_value_lines = 10,
-      },
-    })
+    dapui.setup({})
 
     require("nvim-dap-virtual-text").setup({
       enabled = true,
@@ -38,7 +32,7 @@ return {
       end,
       virt_text_pos = 'eol',
       all_frames = false,
-      virt_lines = true,
+      virt_lines = false,
       virt_text_win_col = nil
     })
 
@@ -55,13 +49,12 @@ return {
 
     -- Configure debug adapters
     require("Config.debugger.adapters.js_dap_adapter").configure_js_adapter()
-    require("Config.debugger.adapters.java").setup() -- Initialize Java debugging
 
     -- Dap Breakpoint und Stopped-Symbole
-    vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
     vim.fn.sign_define('DapBreakpointCondition', { text = 'ﳁ', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
     vim.fn.sign_define('DapLogPoint', { text = '󰐃', texthl = 'DapLogPoint', linehl = 'DapLogPoint', numhl = 'DapLogPoint' })
-    vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapBreakpointStoped', linehl = 'DapStopped', numhl = 'DapStopped' })
+    vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapBreakpointStoped', linehl = 'DapStopped', numhl = 'DapStopped' })
   end
 }
